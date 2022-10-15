@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ComposeQuadrantTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(modifier = Modifier.fillMaxSize(),) {
+                Surface(modifier = Modifier.fillMaxSize()) {
                 }
             }
         }
@@ -33,11 +33,12 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun QuadrantWithColor(title: String, content: String, color: Color) {
+fun QuadrantWithColor(title: String, content: String, color: Color, modifier: Modifier) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
+        modifier = modifier
+            .fillMaxSize()
             .background(color)
             .padding(
                 start = 16.dp,
@@ -73,20 +74,35 @@ fun QuadrantText(title: String, content: String) {
 @Composable
 fun DefaultPreview() {
     ComposeQuadrantTheme {
-        Column {
-            Row {
+        Column(Modifier.fillMaxWidth()) {
+            Row(Modifier.weight(1f)) {
                 QuadrantWithColor(
                     title = stringResource(id = R.string.text_composable),
                     content = stringResource(id = R.string.text_composable_content),
-                    color = Color.Green
+                    color = Color.Green,
+                    modifier = Modifier.weight(1f)
                 )
                 QuadrantWithColor(
                     title = stringResource(id = R.string.image_composable),
                     content = stringResource(id = R.string.image_composable_content),
-                    color = Color.Yellow
+                    color = Color.Yellow,
+                    modifier = Modifier.weight(1f)
+                )
+            }
+            Row(Modifier.weight(1f)) {
+                QuadrantWithColor(
+                    title = stringResource(id = R.string.row_composable),
+                    content = stringResource(id = R.string.row_composable_content),
+                    color = Color.Cyan,
+                    modifier = Modifier.weight(1f)
+                )
+                QuadrantWithColor(
+                    title = stringResource(id = R.string.column_composable),
+                    content = stringResource(id = R.string.column_composable_content),
+                    color = Color.LightGray,
+                    modifier = Modifier.weight(1f)
                 )
             }
         }
-
     }
 }
